@@ -180,10 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c8daa9e88b71e48963e85dc2696742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRightKey: 0
-  MoveLeftKey: 0
-  MoveUpKey: 0
-  MoveDownKey: 0
+  MoveRightKey: 275
+  MoveLeftKey: 276
+  MoveUpKey: 273
+  MoveDownKey: 274
+  playerSpeed: 2
 --- !u!212 &1011018721
 SpriteRenderer:
   m_ObjectHideFlags: 0

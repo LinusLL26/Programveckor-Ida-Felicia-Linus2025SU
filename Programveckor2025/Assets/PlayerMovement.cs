@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     KeyCode MoveDownKey;
 
+    [SerializeField]
+    float playerSpeed;
+
     Rigidbody2D PlayerRigidbody;
     // Start is called before the first frame update
     void Start()
@@ -26,13 +29,23 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerRigidbody.velocity = new Vector2(0, 0);
+
         if (Input.GetKey(MoveRightKey))
         {
-            PlayerRigidbody.velocity = new Vector2(1, 0);
+            PlayerRigidbody.velocity = new Vector2((1 * playerSpeed), PlayerRigidbody.velocity.y);
         }
         if (Input.GetKey(MoveLeftKey))
         {
-            PlayerRigidbody.velocity = new Vector2(-1, 0);
+            PlayerRigidbody.velocity = new Vector2((-1 * playerSpeed), PlayerRigidbody.velocity.y);
+        }
+        if (Input.GetKey(MoveUpKey))
+        {
+            PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (1 * playerSpeed));
+        }
+        if (Input.GetKey(MoveDownKey))
+        {
+            PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (-1 * playerSpeed));
         }
     }
 }
