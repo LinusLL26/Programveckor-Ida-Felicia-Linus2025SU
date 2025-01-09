@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         PlayerRigidbody = GetComponent<Rigidbody2D>();
+        if (PlayerRigidbody == null)
+        {
+            Debug.LogWarning("Rigidbody2D not assinged to player");
+            return;
+        }
     }
 
     // Update is called once per frame
