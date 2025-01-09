@@ -5,8 +5,8 @@ using TMPro;
 
 public class Time_System : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI TextTimer; 
-    [SerializeField] float RemainingTime = 300f; 
+    [SerializeField] TextMeshProUGUI TextTimer;
+    [SerializeField] float RemainingTime = 3600f; 
 
     void Update()
     {
@@ -14,14 +14,16 @@ public class Time_System : MonoBehaviour
         {
             RemainingTime -= Time.deltaTime;
 
-            int minutes = Mathf.FloorToInt(RemainingTime / 60);
-            int seconds = Mathf.FloorToInt(RemainingTime % 60);
+            int hours = Mathf.FloorToInt(RemainingTime / 3600); 
+            int minutes = Mathf.FloorToInt((RemainingTime % 3600) / 60); 
+            int seconds = Mathf.FloorToInt(RemainingTime % 60); 
 
-            TextTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            
+            TextTimer.text = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
         }
         else
         {
-            TextTimer.text = "00:00"; 
+            TextTimer.text = "00:00:00"; 
         }
     }
 }
