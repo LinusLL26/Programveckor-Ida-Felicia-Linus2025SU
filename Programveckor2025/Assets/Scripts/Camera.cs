@@ -14,7 +14,9 @@ public class CameraFollow : MonoBehaviour
             return;
         }
 
-       
-        transform.position = player.position;
+
+        Vector3 newPosition = player.position;
+        newPosition.z = -10f;
+        transform.position = newPosition;
     }
 }
