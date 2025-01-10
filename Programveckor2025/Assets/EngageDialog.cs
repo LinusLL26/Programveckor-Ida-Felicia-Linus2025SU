@@ -17,8 +17,7 @@ public class EngageDialog : MonoBehaviour
 
     bool isCollider;
 
-    [SerializeField]
-    bool playerIsInTrigger;
+    public bool playerIsInTrigger;
 
     // Start is called before the first frame update
     void Start()

@@ -199,12 +199,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36954001}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.93, z: 0}
   m_LocalScale: {x: 17.299904, y: 3.604902, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1011018722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398409518
 GameObject:
@@ -291,8 +291,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -353,7 +353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineNumber: 0
+  interactKey: {fileID: 0}
+  engageDialog: {fileID: 0}
+  dialogCollection: {fileID: 0}
+  dialogText: {fileID: 0}
 --- !u!1 &881190161
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +656,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 36954003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1011018723
@@ -726,6 +730,8 @@ GameObject:
   - component: {fileID: 1263795156}
   - component: {fileID: 1263795159}
   - component: {fileID: 1263795158}
+  - component: {fileID: 1263795160}
+  - component: {fileID: 1263795161}
   m_Layer: 0
   m_Name: Test NPC
   m_TagString: Untagged
@@ -861,6 +867,53 @@ MonoBehaviour:
   DialogText: {fileID: 398409518}
   hasStartedDialog: 0
   interactKey: {fileID: 1011018723}
+  playerIsInTrigger: 0
+--- !u!114 &1263795160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263795155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: {fileID: 0}
+  engageDialog: {fileID: 0}
+  dialogCollection: {fileID: 0}
+  dialogText: {fileID: 0}
+--- !u!114 &1263795161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263795155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7e21b62e831b94c8926b9c9bc4259a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogID1: Hello, this is my first line of dialog
+  dialogID2: This is my second line of dialog
+  dialogID3: This is my third and final line of dialog
+  dialogID4: 
+  dialogID7: 
+  dialogID8: 
+  dialogID9: 
+  dialogID10: 
+  dialogID11: 
+  dialogID12: 
+  dialogID13: 
+  dialogID14: 
+  dialogID15: 
+  dialogID16: 
+  dialogID17: 
+  dialogID18: 
+  dialogID19: 
+  dialogID20: 
 --- !u!1 &2035436796
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,5 +1028,4 @@ SceneRoots:
   - {fileID: 2035436799}
   - {fileID: 1011018722}
   - {fileID: 1263795157}
-  - {fileID: 36954003}
   - {fileID: 881190165}
