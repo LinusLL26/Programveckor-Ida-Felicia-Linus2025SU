@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerRigidbody.velocity = new Vector2(0, 0);
 
+        if (PlayerRigidbody != null)
+        {
         if (Input.GetKey(MoveRightKey))
         {
             PlayerRigidbody.velocity = new Vector2((1 * playerSpeed), PlayerRigidbody.velocity.y);
@@ -51,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(MoveDownKey))
         {
             PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (-1 * playerSpeed));
+        }
         }
     }
 }
