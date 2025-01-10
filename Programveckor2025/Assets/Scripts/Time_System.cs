@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Time_System : MonoBehaviour
 {
@@ -25,5 +26,15 @@ public class Time_System : MonoBehaviour
         {
             TextTimer.text = "00:00:00"; 
         }
+
+        if (RemainingTime<= 0)
+        {
+            NoTime();
+        }
+    }
+
+    void NoTime()
+    {
+        SceneManager.LoadScene("Ending_GameOver");
     }
 }
