@@ -217,7 +217,6 @@ GameObject:
   - component: {fileID: 398409519}
   - component: {fileID: 398409521}
   - component: {fileID: 398409520}
-  - component: {fileID: 398409522}
   m_Layer: 5
   m_Name: DialogText
   m_TagString: Untagged
@@ -341,22 +340,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398409518}
   m_CullTransparentMesh: 1
---- !u!114 &398409522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398409518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactKey: {fileID: 0}
-  engageDialog: {fileID: 0}
-  dialogCollection: {fileID: 0}
-  dialogText: {fileID: 0}
 --- !u!1 &881190161
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,10 +863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: {fileID: 0}
-  engageDialog: {fileID: 0}
-  dialogCollection: {fileID: 0}
-  dialogText: {fileID: 0}
+  interactKey: {fileID: 1011018723}
+  engageDialog: {fileID: 1263795159}
+  dialogCollection: {fileID: 1263795161}
+  dialogText: {fileID: 398409520}
 --- !u!114 &1263795161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +883,8 @@ MonoBehaviour:
   dialogID2: This is my second line of dialog
   dialogID3: This is my third and final line of dialog
   dialogID4: 
+  dialogID5: 
+  dialogID6: 
   dialogID7: 
   dialogID8: 
   dialogID9: 
