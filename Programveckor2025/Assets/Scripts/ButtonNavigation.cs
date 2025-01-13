@@ -23,13 +23,13 @@ public class ButtonNavigation : MonoBehaviour
 
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             NavigateButtons();
         }
 
-        
+
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             PressButton(currentIndex);  // Trigger the selected button's onClick
@@ -52,7 +52,7 @@ public class ButtonNavigation : MonoBehaviour
         if (currentIndex >= buttons.Length) currentIndex = 0;
 
         ShowBackground(currentIndex);
-     
+
         EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
         buttons[currentIndex].Select(); // Ensure the button is selected
     }
