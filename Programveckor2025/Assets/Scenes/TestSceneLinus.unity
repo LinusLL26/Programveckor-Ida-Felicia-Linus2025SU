@@ -863,10 +863,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EndRepetition: 3
   interactKey: {fileID: 1011018723}
   engageDialog: {fileID: 1263795159}
   dialogCollection: {fileID: 1263795161}
   dialogText: {fileID: 398409520}
+  lineNumber: 0
 --- !u!114 &1263795161
 MonoBehaviour:
   m_ObjectHideFlags: 0
