@@ -5,103 +5,135 @@ using UnityEngine.EventSystems;
 public class ButtonNavigation : MonoBehaviour
 {
     public Button[] buttons;  // Reference to the buttons in the current menu
-    public Image[] buttonBackgrounds; // Reference to the background images
-    private int currentIndex = 0;
-
     public GameObject mainMenuPanel;  // Reference to the Main Menu (Pause Menu)
     public GameObject inventoryPanel;  // Reference to the Inventory Panel
 
+    private int currentIndex = 0;
+    private bool isPaused = false; // Tracks if the game is paused
+
     void Start()
     {
+        // Ensure both panels are hidden at the start
+        mainMenuPanel.SetActive(false);
+        inventoryPanel.SetActive(false);
+
+        // Setup initial button selection
         if (buttons.Length > 0)
         {
             EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
-            buttons[currentIndex].Select();  // Make sure the first button is selected
-            ShowBackground(currentIndex);  // Show the background behind the selected button
+            buttons[currentIndex].Select();  // Select the first button
         }
     }
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        // Pause menu toggle
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            NavigateButtons();
+            if (inventoryPanel.activeSelf)
+            {
+                SwitchToMainMenu(); // Exit inventory and return to the pause menu
+            }
+            else
+            {
+                TogglePauseMenu(); // Toggle pause menu visibility
+            }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        // Button navigation only when a menu is active
+        if (isPaused && mainMenuPanel.activeSelf)
         {
-            PressButton(currentIndex);  // Trigger the selected button's onClick
+            HandleButtonNavigation();
         }
     }
 
-    private void NavigateButtons()
+    private void HandleButtonNavigation()
     {
+        // Navigate between buttons with Up/Down arrows
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            currentIndex--;
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : buttons.Length - 1;
+            SelectButton(currentIndex);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            currentIndex++;
+            currentIndex = (currentIndex < buttons.Length - 1) ? currentIndex + 1 : 0;
+            SelectButton(currentIndex);
         }
 
-        // Wrap around the button index to keep it within bounds
-        if (currentIndex < 0) currentIndex = buttons.Length - 1;
-        if (currentIndex >= buttons.Length) currentIndex = 0;
-
-        ShowBackground(currentIndex);
-
-        EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
-        buttons[currentIndex].Select(); // Ensure the button is selected
-    }
-
-    // Function to show the background for the currently selected button
-    private void ShowBackground(int index)
-    {
-        // Hide all backgrounds first
-        foreach (Image background in buttonBackgrounds)
+        // Trigger the selected button's action with Enter/Return
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            background.color = new Color(0, 0, 0, 0); // Make the background invisible
+            PressButton(currentIndex);
         }
-
-        // Make the selected button's background visible
-        buttonBackgrounds[index].color = new Color(0, 0, 0, 1f);
     }
 
-    // Function to simulate pressing the selected button
+    private void SelectButton(int index)
+    {
+        if (buttons.Length > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
+            buttons[index].Select();
+        }
+    }
+
     private void PressButton(int index)
     {
         if (buttons[index] != null)
         {
-            buttons[index].onClick.Invoke(); // Trigger the selected button's OnClick() event
+            buttons[index].onClick.Invoke(); // Trigger the button's onClick event
         }
     }
 
-    // Function to toggle between Main Menu (Pause Menu) and Inventory
-    public void SwitchToMainMenu()
+    public void TogglePauseMenu()
     {
-        // Hide the Inventory panel and show the Pause Menu (Main Menu) panel
-        inventoryPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
+        isPaused = !isPaused;
 
-        // You can also reset button navigation if needed
-        currentIndex = 0;  // Set it to the first button in the main menu
-        buttons = mainMenuPanel.GetComponentsInChildren<Button>();  // Update the buttons array
-        buttonBackgrounds = mainMenuPanel.GetComponentsInChildren<Image>();  // Update background images
+        if (isPaused)
+        {
+            Time.timeScale = 0f; // Pause the game
+            mainMenuPanel.SetActive(true); // Show the pause menu
+            inventoryPanel.SetActive(false); // Ensure the inventory is hidden
+
+            // Initialize button navigation for the pause menu
+            buttons = mainMenuPanel.GetComponentsInChildren<Button>();
+            currentIndex = 0; // Start with the first button
+            SelectButton(currentIndex);
+        }
+        else
+        {
+            Time.timeScale = 1f; // Resume the game
+            mainMenuPanel.SetActive(false); // Hide the pause menu
+            inventoryPanel.SetActive(false); // Ensure the inventory is hidden
+        }
     }
 
-    // Function to switch to the Inventory Menu (can be hooked to the Inventory Button in the Pause Menu)
     public void SwitchToInventory()
     {
-        // Hide the Pause Menu (Main Menu) panel and show the Inventory panel
         mainMenuPanel.SetActive(false);
         inventoryPanel.SetActive(true);
 
-        // You can also reset button navigation for the inventory menu
-        currentIndex = 0;  // Set it to the first button in the inventory menu
-        buttons = inventoryPanel.GetComponentsInChildren<Button>();  // Update the buttons array
-        buttonBackgrounds = inventoryPanel.GetComponentsInChildren<Image>();  // Update background images
+        // Initialize button navigation for the inventory menu
+        buttons = inventoryPanel.GetComponentsInChildren<Button>();
+        currentIndex = 0; // Start with the first button
+        SelectButton(currentIndex);
+    }
+
+    public void SwitchToMainMenu()
+    {
+        inventoryPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+
+        // Initialize button navigation for the main menu
+        buttons = mainMenuPanel.GetComponentsInChildren<Button>();
+        currentIndex = 0; // Start with the first button
+        SelectButton(currentIndex);
+    }
+
+    public void QuitGame()
+    {
+        // Implement quit functionality
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }
