@@ -11,6 +11,8 @@ public class DialogCollection : MonoBehaviour
     public string dialogID2 = "This is my second line of dialog";
     public string dialogID3 = "This is my third and final line of dialog";
     public string dialogID4;
+    public string dialogID5;
+    public string dialogID6;
     public string dialogID7;
     public string dialogID8;
     public string dialogID9;
