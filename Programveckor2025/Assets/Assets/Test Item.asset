@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb39280e2b3c7a41beee4b864f1f70e, type: 3}
   m_Name: Test Item
   m_EditorClassIdentifier: 
+  ID: 0
+  DisplayName: 
+  Description: 
+  Icon: {fileID: 0}
+  MaxStackSize: 1
