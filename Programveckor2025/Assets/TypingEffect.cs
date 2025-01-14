@@ -80,15 +80,16 @@ public class TypingEffect : MonoBehaviour
 
         readyForNewText = false;
 
-        if (TypeWriterCoroutine == null)
+        if (TypeWriterCoroutine != null)
         {
             StopCoroutine(TypeWriterCoroutine);
         }
+        else { 
+            TextBox.maxVisibleCharacters = 0;
+            currentlyVisibleCharacterIndex = 0;
 
-        TextBox.maxVisibleCharacters = 0;
-        currentlyVisibleCharacterIndex = 0;
-
-        TypeWriterCoroutine = StartCoroutine(routine: TypeWriter());
+            TypeWriterCoroutine = StartCoroutine(routine: TypeWriter());
+        }
     }
     void Skip()
     {
