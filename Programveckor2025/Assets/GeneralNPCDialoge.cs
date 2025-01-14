@@ -71,7 +71,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line1;
+            dialogText.SetText(line1);
         }if (lineNumberForFunktion == 2)
         {
             if (line2 == "")
@@ -80,7 +80,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line2;
+            dialogText.SetText(line2);
         }if (lineNumberForFunktion == 3)
         {
             if (line3 == "")
@@ -89,7 +89,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line3;
+            dialogText.SetText(line3);
         }if (lineNumberForFunktion == 4)
         {
             if (line4 == "")
@@ -98,7 +98,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line4;
+            dialogText.SetText(line4);
         }if (lineNumberForFunktion == 5)
         {
             if (line5 == "")
@@ -107,7 +107,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line5;
+            dialogText.SetText(line5);
         }if (lineNumberForFunktion == 6)
         {
             if (line6 == "")
@@ -116,7 +116,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line6;
+            dialogText.SetText(line6);
         }if (lineNumberForFunktion == 7)
         {
             if (line7 == "")
@@ -125,7 +125,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line7;
+            dialogText.SetText(line7);
         }if (lineNumberForFunktion == 8)
         {
             if (line8 == "")
@@ -134,7 +134,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line8;
+            dialogText.SetText(line8);
         }if (lineNumberForFunktion == 9)
         {
             if (line9 == "")
@@ -143,7 +143,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line9;
+            dialogText.SetText(line9);
         }if (lineNumberForFunktion == 10)
         {
             if (line10 == "")
@@ -152,7 +152,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line10;
+            dialogText.SetText(line10);
         }if (lineNumberForFunktion == 11)
         {
             if (line11 == "")
@@ -161,7 +161,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line11;
+            dialogText.SetText(line11);
         }if (lineNumberForFunktion == 12)
         {
             if (line12 == "")
@@ -170,7 +170,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line12;
+            dialogText.SetText(line12);
         }if (lineNumberForFunktion == 13)
         {
             if (line13 == "")
@@ -179,7 +179,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line13;
+            dialogText.SetText(line13);
         }if (lineNumberForFunktion == 14)
         {
             if (line14 == "")
@@ -188,7 +188,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line14;
+            dialogText.SetText(line14);
         }if (lineNumberForFunktion == 15)
         {
             if (line15 == "")
@@ -197,7 +197,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line15;
+            dialogText.SetText(line15);
         }if (lineNumberForFunktion == 16)
         {
             if (line16 == "")
@@ -206,7 +206,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line16;
+            dialogText.SetText(line16);
         }if (lineNumberForFunktion == 17)
         {
             if (line17 == "")
@@ -215,7 +215,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line17;
+            dialogText.SetText(line17);
         }if (lineNumberForFunktion == 18)
         {
             if (line18 == "")
@@ -224,7 +224,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line18;
+            dialogText.SetText(line18);
         }if (lineNumberForFunktion == 19)
         {
             if (line19 == "")
@@ -233,7 +233,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line19;
+            dialogText.SetText(line19);
         }if (lineNumberForFunktion == 20)
         {
             if (line20 == "")
@@ -242,7 +242,7 @@ public class GeneralNPCDialoge : MonoBehaviour
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.text = line20;
+            dialogText.SetText(line20);
         }
     }
 }
