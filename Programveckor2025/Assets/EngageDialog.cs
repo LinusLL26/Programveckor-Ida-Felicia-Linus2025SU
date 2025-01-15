@@ -51,11 +51,6 @@ public class EngageDialog : MonoBehaviour
                 DialogBox.SetActive(true);
                 DialogText.SetActive(true);
         }
-        if (hasStartedDialog == false)
-        {
-            DialogBox.SetActive(false);
-            DialogText.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
