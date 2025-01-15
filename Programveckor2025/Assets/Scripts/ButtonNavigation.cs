@@ -113,11 +113,23 @@ public class ButtonNavigation : MonoBehaviour
         mainMenuPanel.SetActive(false);
         inventoryPanel.SetActive(true);
 
+        // Refresh the inventory UI
+        var inventoryDisplay = inventoryPanel.GetComponentInChildren<StaticInventoryDisplay>();
+        if (inventoryDisplay != null && inventoryDisplay.InventorySystemn != null)
+        {
+            inventoryDisplay.AssignSlot(inventoryDisplay.InventorySystemn);
+        }
+        else
+        {
+            Debug.LogError("Inventory Display or System not found.");
+        }
+
         // Initialize button navigation for the inventory menu
         buttons = inventoryPanel.GetComponentsInChildren<Button>();
         currentIndex = 0; // Start with the first button
         SelectButton(currentIndex);
     }
+
 
     public void SwitchToMainMenu()
     {
