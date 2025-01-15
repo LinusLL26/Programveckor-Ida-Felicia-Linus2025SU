@@ -22,6 +22,7 @@ public class EngageDialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         InteractionTrigger = GetComponent<BoxCollider2D>();
 
         if (InteractionTrigger == null)

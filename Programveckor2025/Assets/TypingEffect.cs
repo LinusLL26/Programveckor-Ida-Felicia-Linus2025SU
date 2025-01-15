@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Transactions;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -73,22 +70,37 @@ public class TypingEffect : MonoBehaviour
 
     public void PrepareForNewText(Object obj)
     {
-        if (!readyForNewText)
-        {
+        if (obj != TextBox || !readyForNewText || TextBox.maxVisibleCharacters >= TextBox.textInfo.characterCount)
             return;
-        }
 
+        IsCurrentlySkipping = false;
         readyForNewText = false;
 
-        if (TypeWriterCoroutine == null)
-        {
+        if (TypeWriterCoroutine != null)
             StopCoroutine(TypeWriterCoroutine);
-        }
 
         TextBox.maxVisibleCharacters = 0;
         currentlyVisibleCharacterIndex = 0;
 
-        TypeWriterCoroutine = StartCoroutine(routine: TypeWriter());
+        TypeWriterCoroutine = StartCoroutine(TypeWriter());
+        /*
+         if (!readyForNewText)
+         {
+             return;
+         }
+
+         readyForNewText = false;
+
+         if (TypeWriterCoroutine != null)
+         {
+             StopCoroutine(TypeWriterCoroutine);
+         }
+         else { 
+             TextBox.maxVisibleCharacters = 0;
+             currentlyVisibleCharacterIndex = 0;
+
+             TypeWriterCoroutine = StartCoroutine(routine: TypeWriter());
+         }*/
     }
     void Skip()
     {
@@ -96,7 +108,7 @@ public class TypingEffect : MonoBehaviour
         {
             return;
         }
-        
+
         IsCurrentlySkipping = true;
 
         if (!quickSkip)
@@ -114,11 +126,11 @@ public class TypingEffect : MonoBehaviour
     {
         TMP_TextInfo textInfo = TextBox.textInfo;
 
-        while(currentlyVisibleCharacterIndex < textInfo.characterCount + 1)
+        while (currentlyVisibleCharacterIndex < textInfo.characterCount + 1)
         {
             int lastCharacterIndex = textInfo.characterCount - 1;
 
-            if (currentlyVisibleCharacterIndex == lastCharacterIndex)
+            if (currentlyVisibleCharacterIndex >= lastCharacterIndex)
             {
                 TextBox.maxVisibleCharacters++;
                 yield return _textBoxFulleventDelay;
@@ -132,7 +144,7 @@ public class TypingEffect : MonoBehaviour
 
             TextBox.maxVisibleCharacters++;
 
-            if(!IsCurrentlySkipping && character == '.' || character == '?' || character == '!' || character == ',' || character == ':' || character == ';' || character == '-')
+            if (!IsCurrentlySkipping && character == '.' || character == '?' || character == '!' || character == ',' || character == ':' || character == ';' || character == '-')
             {
                 yield return _interpuctuationDelay;
             }
