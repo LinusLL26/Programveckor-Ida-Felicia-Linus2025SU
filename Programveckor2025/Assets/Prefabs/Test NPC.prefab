@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7355010670830458954}
   - component: {fileID: 3812871417574028198}
-  - component: {fileID: 2711533191491706148}
   - component: {fileID: 2834795881084899546}
   - component: {fileID: 3578206438315740832}
   - component: {fileID: 3937340076740109182}
@@ -88,23 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2711533191491706148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483472716408305199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed6aa3d71a65844eb9ed6befa690ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DialogBox: {fileID: 0}
-  DialogText: {fileID: 0}
-  hasStartedDialog: 0
-  interactKey: {fileID: 0}
-  playerIsInTrigger: 0
 --- !u!61 &2834795881084899546
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,12 +144,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7e1145e08efca45968c70a4e7d934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DialogBox: {fileID: 0}
+  TextObject: {fileID: 0}
+  DialogText: {fileID: 0}
   EndRepetition: 3
   interactKey: {fileID: 0}
-  engageDialog: {fileID: 2711533191491706148}
   dialogCollection: {fileID: 3937340076740109182}
-  dialogText: {fileID: 0}
   lineNumber: 0
+  playerIsInTrigger: 0
+  hasStartedDialog: 0
 --- !u!114 &3937340076740109182
 MonoBehaviour:
   m_ObjectHideFlags: 0
