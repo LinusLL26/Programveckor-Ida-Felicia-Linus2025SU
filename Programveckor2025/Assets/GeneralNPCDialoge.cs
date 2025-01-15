@@ -33,6 +33,8 @@ public class GeneralNPCDialoge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EndRepetition = EndRepetition + 1;
+
         if (interactKey == null)
         {
             Debug.LogWarning("interact key not assigned");
@@ -76,20 +78,23 @@ public class GeneralNPCDialoge : MonoBehaviour
 
             DialogBox.SetActive(true);
             TextObject.SetActive(true);
+
+            lineNumber += 1;
+            DialogLines(dialogCollection.dialogID1, dialogCollection.dialogID2, dialogCollection.dialogID3, dialogCollection.dialogID4, dialogCollection.dialogID5, dialogCollection.dialogID6, dialogCollection.dialogID7, dialogCollection.dialogID8, dialogCollection.dialogID9, dialogCollection.dialogID10, dialogCollection.dialogID11, dialogCollection.dialogID12, dialogCollection.dialogID13, dialogCollection.dialogID14, dialogCollection.dialogID15, dialogCollection.dialogID16, dialogCollection.dialogID17, dialogCollection.dialogID18, dialogCollection.dialogID19, dialogCollection.dialogID20, lineNumber);
+           
         }
 
         if (hasStartedDialog == true && playerIsInTrigger == true)
         {
             if (Input.GetKeyDown(interactKey.InteractionKey))
             {
-                lineNumber += 1;
             }
         }
         if (lineNumber > 20)
         {
             lineNumber = 20;
         }
-        DialogLines(dialogCollection.dialogID1, dialogCollection.dialogID2, dialogCollection.dialogID3, dialogCollection.dialogID4, dialogCollection.dialogID5, dialogCollection.dialogID6, dialogCollection.dialogID7, dialogCollection.dialogID8, dialogCollection.dialogID9, dialogCollection.dialogID10, dialogCollection.dialogID11, dialogCollection.dialogID12, dialogCollection.dialogID13, dialogCollection.dialogID14, dialogCollection.dialogID15, dialogCollection.dialogID16, dialogCollection.dialogID17, dialogCollection.dialogID18, dialogCollection.dialogID19, dialogCollection.dialogID20, lineNumber);
+       
     }
 
 
