@@ -6,18 +6,29 @@ using UnityEngine;
 
 public class GeneralNPCDialoge : MonoBehaviour
 {
+    BoxCollider2D InteractionTrigger;
+
+    public GameObject DialogBox;
+
+    public GameObject TextObject;
+
+    public TextMeshProUGUI DialogText;
+
     [SerializeField]
     int EndRepetition;
 
     public InteractKey interactKey;
 
-    public EngageDialog engageDialog;
-
     public DialogCollection dialogCollection;
 
-    public TextMeshProUGUI dialogText;
-
     public int lineNumber;
+
+    bool isCollider;
+
+    public bool playerIsInTrigger;
+
+    public bool hasStartedDialog;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +37,7 @@ public class GeneralNPCDialoge : MonoBehaviour
         {
             Debug.LogWarning("interact key not assigned");
         }
-        if (dialogText == null)
+        if (DialogText == null)
         {
             Debug.LogWarning("Text not assigned");
         }
@@ -34,20 +45,40 @@ public class GeneralNPCDialoge : MonoBehaviour
         {
             Debug.LogWarning("dialog collection not assigned");
         }
-        if (engageDialog == null)
+
+        InteractionTrigger = GetComponent<BoxCollider2D>();
+
+        if (InteractionTrigger == null)
         {
-            Debug.LogWarning("engage dialog not assigned");
+            Debug.LogWarning("Trigger not present on NPC");
+            return;
         }
 
-        lineNumber = 0;
+        hasStartedDialog = false;
 
-        EndRepetition = EndRepetition + 1;
+        DialogBox.SetActive(false);
+        TextObject.SetActive(false);
+
+        lineNumber = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (engageDialog.hasStartedDialog == true && engageDialog.playerIsInTrigger == true)
+        if (isCollider == true)
+        {
+            Debug.LogWarning("BoxCollider2D is not set to is trigger");
+        }
+
+        if (InteractionTrigger != null && playerIsInTrigger == true && Input.GetKeyDown(interactKey.InteractionKey))
+        {
+            hasStartedDialog = true;
+
+            DialogBox.SetActive(true);
+            TextObject.SetActive(true);
+        }
+
+        if (hasStartedDialog == true && playerIsInTrigger == true)
         {
             if (Input.GetKeyDown(interactKey.InteractionKey))
             {
@@ -61,188 +92,207 @@ public class GeneralNPCDialoge : MonoBehaviour
         DialogLines(dialogCollection.dialogID1, dialogCollection.dialogID2, dialogCollection.dialogID3, dialogCollection.dialogID4, dialogCollection.dialogID5, dialogCollection.dialogID6, dialogCollection.dialogID7, dialogCollection.dialogID8, dialogCollection.dialogID9, dialogCollection.dialogID10, dialogCollection.dialogID11, dialogCollection.dialogID12, dialogCollection.dialogID13, dialogCollection.dialogID14, dialogCollection.dialogID15, dialogCollection.dialogID16, dialogCollection.dialogID17, dialogCollection.dialogID18, dialogCollection.dialogID19, dialogCollection.dialogID20, lineNumber);
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("player walked into trigger");
+        playerIsInTrigger = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        print("player exited trigger");
+        playerIsInTrigger = false;
+
+        DialogBox.SetActive(false);
+        TextObject.SetActive(false);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isCollider = true;
+    }
+
     void DialogLines(string line1, string line2, string line3, string line4, string line5, string line6, string line7, string line8, string line9, string line10, string line11, string line12, string line13, string line14, string line15, string line16, string line17, string line18, string line19, string line20, int lineNumberForFunktion)
     {
         if (lineNumberForFunktion == 1)
         {
             if (line1 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line1);
+            DialogText.SetText(line1);
         }if (lineNumberForFunktion == 2)
         {
             if (line2 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line2);
+            DialogText.SetText(line2);
         }if (lineNumberForFunktion == 3)
         {
             if (line3 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line3);
+            DialogText.SetText(line3);
         }if (lineNumberForFunktion == 4)
         {
             if (line4 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line4);
+            DialogText.SetText(line4);
         }if (lineNumberForFunktion == 5)
         {
             if (line5 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line5);
+            DialogText.SetText(line5);
         }if (lineNumberForFunktion == 6)
         {
             if (line6 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line6);
+            DialogText.SetText(line6);
         }if (lineNumberForFunktion == 7)
         {
             if (line7 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line7);
+            DialogText.SetText(line7);
         }if (lineNumberForFunktion == 8)
         {
             if (line8 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line8);
+            DialogText.SetText(line8);
         }if (lineNumberForFunktion == 9)
         {
             if (line9 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line9);
+            DialogText.SetText(line9);
         }if (lineNumberForFunktion == 10)
         {
             if (line10 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line10);
+            DialogText.SetText(line10);
         }if (lineNumberForFunktion == 11)
         {
             if (line11 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line11);
+            DialogText.SetText(line11);
         }if (lineNumberForFunktion == 12)
         {
             if (line12 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line12);
+            DialogText.SetText(line12);
         }if (lineNumberForFunktion == 13)
         {
             if (line13 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line13);
+            DialogText.SetText(line13);
         }if (lineNumberForFunktion == 14)
         {
             if (line14 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line14);
+            DialogText.SetText(line14);
         }if (lineNumberForFunktion == 15)
         {
             if (line15 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line15);
+            DialogText.SetText(line15);
         }if (lineNumberForFunktion == 16)
         {
             if (line16 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line16);
+            DialogText.SetText(line16);
         }if (lineNumberForFunktion == 17)
         {
             if (line17 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line17);
+            DialogText.SetText(line17);
         }if (lineNumberForFunktion == 18)
         {
             if (line18 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line18);
+            DialogText.SetText(line18);
         }if (lineNumberForFunktion == 19)
         {
             if (line19 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line19);
+            DialogText.SetText(line19);
         }if (lineNumberForFunktion == 20)
         {
             if (line20 == "")
             {
-                engageDialog.hasStartedDialog = false;
+                hasStartedDialog = false;
                 lineNumber -= EndRepetition;
                 return;
             }
-            dialogText.SetText(line20);
+            DialogText.SetText(line20);
         }
     }
 }

@@ -726,6 +726,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1011018723}
     - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: DialogBox
+      value: 
+      objectReference: {fileID: 36954001}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: DialogText
+      value: 
+      objectReference: {fileID: 398409520}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: TextObject
+      value: 
+      objectReference: {fileID: 398409518}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
       propertyPath: dialogText
       value: 
       objectReference: {fileID: 398409520}
@@ -920,6 +932,18 @@ PrefabInstance:
       propertyPath: interactKey
       value: 
       objectReference: {fileID: 1011018723}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: DialogBox
+      value: 
+      objectReference: {fileID: 36954001}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: DialogText
+      value: 
+      objectReference: {fileID: 398409520}
+    - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
+      propertyPath: TextObject
+      value: 
+      objectReference: {fileID: 398409518}
     - target: {fileID: 3578206438315740832, guid: ecb55e354b732d94086983869a51bc0a, type: 3}
       propertyPath: dialogText
       value: 
