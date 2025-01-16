@@ -44,26 +44,26 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(MoveRightKey))
         {
             PlayerRigidbody.velocity = new Vector2((1 * playerSpeed), PlayerRigidbody.velocity.y);
-                animator.SetFloat("Run", playerSpeed); 
+                animator.Play("WalkRight Animation"); 
         }
         else if (Input.GetKey(MoveLeftKey))
         {
             PlayerRigidbody.velocity = new Vector2((-1 * playerSpeed), PlayerRigidbody.velocity.y);
-                animator.SetFloat("RunLeft", playerSpeed);
+                animator.Play("WalkLeft Animation");
             }
         else if (Input.GetKey(MoveUpKey))
         {
             PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (1 * playerSpeed));
-                animator.SetFloat("RunUp", playerSpeed);
+                animator.Play("WalkUp Animation");
             }
         else if (Input.GetKey(MoveDownKey))
         {
             PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (-1 * playerSpeed));
-                animator.SetFloat("RunDown", playerSpeed);
+                animator.Play("WalkDown Animation");
             }
             else
             {
-                animator.SetFloat("Run", 0f);
+                animator.Play("idle");
             }
         }
     }
