@@ -4,25 +4,17 @@ using UnityEngine.EventSystems;
 
 public class ButtonNavigation : MonoBehaviour
 {
-    public Button[] buttons;  // Reference to the buttons in the current menu
-    public GameObject mainMenuPanel;  // Reference to the Main Menu (Pause Menu)
-    public GameObject inventoryPanel;  // Reference to the Inventory Panel
+    public Button[] buttons;
+    public GameObject mainMenuPanel;
+    public GameObject inventoryPanel;
 
     private int currentIndex = 0;
     private bool isPaused = false; // Tracks if the game is paused
 
     void Start()
     {
-        // Ensure both panels are hidden at the start
         mainMenuPanel.SetActive(false);
         inventoryPanel.SetActive(false);
-
-        // Setup initial button selection
-        if (buttons.Length > 0)
-        {
-            EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
-            buttons[currentIndex].Select();  // Select the first button
-        }
     }
 
     void Update()
@@ -30,26 +22,27 @@ public class ButtonNavigation : MonoBehaviour
         // Pause menu toggle
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            print("panel: " + inventoryPanel.activeSelf);
             if (inventoryPanel.activeSelf)
             {
                 SwitchToMainMenu(); // Exit inventory and return to the pause menu
             }
             else
             {
-                TogglePauseMenu(); // Toggle pause menu visibility
+                print("Toggle pause menu");
+                TogglePauseMenu();
             }
         }
 
-        // Button navigation only when a menu is active
         if (isPaused && mainMenuPanel.activeSelf)
         {
+            print("Inne i pause + main true");
             HandleButtonNavigation();
         }
     }
 
     private void HandleButtonNavigation()
     {
-        // Navigate between buttons with Up/Down arrows
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : buttons.Length - 1;
@@ -61,7 +54,6 @@ public class ButtonNavigation : MonoBehaviour
             SelectButton(currentIndex);
         }
 
-        // Trigger the selected button's action with Enter/Return
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             PressButton(currentIndex);
@@ -70,20 +62,49 @@ public class ButtonNavigation : MonoBehaviour
 
     private void SelectButton(int index)
     {
-        if (buttons.Length > 0)
+        if (buttons.Length > 0 && index >= 0 && index < buttons.Length)
         {
             EventSystem.current.SetSelectedGameObject(buttons[index].gameObject);
             buttons[index].Select();
+            Debug.Log("Selected button: " + buttons[index].name); // Debug log to confirm the button selection
+        }
+        else
+        {
+            Debug.LogWarning("Button index out of bounds: " + index);
         }
     }
 
     private void PressButton(int index)
     {
-        if (buttons[index] != null)
+        // Ensure the buttons array is not null and index is within bounds
+        if (buttons != null && buttons.Length > 0 && index >= 0 && index < buttons.Length)
         {
-            buttons[index].onClick.Invoke(); // Trigger the button's onClick event
+            Button button = buttons[index];
+
+            // Check if the button is not null
+            if (button != null)
+            {
+                if (button.onClick != null && button.onClick.GetPersistentEventCount() > 0)
+                {
+                    button.onClick.Invoke();
+                    Debug.Log("Button " + index + " pressed: " + button.name);
+                }
+                else
+                {
+                    Debug.LogWarning("Button at index " + index + " has no onClick listeners assigned.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Button at index " + index + " is null.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Invalid button press attempt at index: " + index + ". Button array is null or index is out of bounds.");
         }
     }
+
 
     public void TogglePauseMenu()
     {
@@ -93,7 +114,7 @@ public class ButtonNavigation : MonoBehaviour
         {
             Time.timeScale = 0f; // Pause the game
             mainMenuPanel.SetActive(true); // Show the pause menu
-            inventoryPanel.SetActive(false); // Ensure the inventory is hidden
+            inventoryPanel.SetActive(false);
 
             // Initialize button navigation for the pause menu
             buttons = mainMenuPanel.GetComponentsInChildren<Button>();
@@ -104,25 +125,15 @@ public class ButtonNavigation : MonoBehaviour
         {
             Time.timeScale = 1f; // Resume the game
             mainMenuPanel.SetActive(false); // Hide the pause menu
-            inventoryPanel.SetActive(false); // Ensure the inventory is hidden
+            inventoryPanel.SetActive(false);
         }
     }
 
     public void SwitchToInventory()
     {
+        print("Inne i switch to inventory");
         mainMenuPanel.SetActive(false);
         inventoryPanel.SetActive(true);
-
-        // Refresh the inventory UI
-        var inventoryDisplay = inventoryPanel.GetComponentInChildren<StaticInventoryDisplay>();
-        if (inventoryDisplay != null && inventoryDisplay.InventorySystemn != null)
-        {
-            inventoryDisplay.AssignSlot(inventoryDisplay.InventorySystemn);
-        }
-        else
-        {
-            Debug.LogError("Inventory Display or System not found.");
-        }
 
         // Initialize button navigation for the inventory menu
         buttons = inventoryPanel.GetComponentsInChildren<Button>();
@@ -130,9 +141,9 @@ public class ButtonNavigation : MonoBehaviour
         SelectButton(currentIndex);
     }
 
-
     public void SwitchToMainMenu()
     {
+        print("Inne i switch to main");
         inventoryPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
 
@@ -140,12 +151,5 @@ public class ButtonNavigation : MonoBehaviour
         buttons = mainMenuPanel.GetComponentsInChildren<Button>();
         currentIndex = 0; // Start with the first button
         SelectButton(currentIndex);
-    }
-
-    public void QuitGame()
-    {
-        // Implement quit functionality
-        Debug.Log("Quitting game...");
-        Application.Quit();
     }
 }
