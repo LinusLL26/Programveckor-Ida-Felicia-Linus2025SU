@@ -20,9 +20,12 @@ public class PlayerMovement : MonoBehaviour
     float playerSpeed;
 
     Rigidbody2D PlayerRigidbody;
+
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         PlayerRigidbody = GetComponent<Rigidbody2D>();
         if (PlayerRigidbody == null)
         {
@@ -41,19 +44,27 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(MoveRightKey))
         {
             PlayerRigidbody.velocity = new Vector2((1 * playerSpeed), PlayerRigidbody.velocity.y);
+                animator.SetFloat("Run", playerSpeed); 
         }
-        if (Input.GetKey(MoveLeftKey))
+        else if (Input.GetKey(MoveLeftKey))
         {
             PlayerRigidbody.velocity = new Vector2((-1 * playerSpeed), PlayerRigidbody.velocity.y);
-        }
-        if (Input.GetKey(MoveUpKey))
+                animator.SetFloat("RunLeft", playerSpeed);
+            }
+        else if (Input.GetKey(MoveUpKey))
         {
             PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (1 * playerSpeed));
-        }
-        if (Input.GetKey(MoveDownKey))
+                animator.SetFloat("RunUp", playerSpeed);
+            }
+        else if (Input.GetKey(MoveDownKey))
         {
             PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, (-1 * playerSpeed));
-        }
+                animator.SetFloat("RunDown", playerSpeed);
+            }
+            else
+            {
+                animator.SetFloat("Run", 0f);
+            }
         }
     }
 }
