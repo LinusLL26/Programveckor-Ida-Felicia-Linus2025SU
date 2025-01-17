@@ -7,10 +7,10 @@ public class Time_System : MonoBehaviour
     [SerializeField] TextMeshProUGUI TextTimer;
     [SerializeField] float RemainingTime = 600f;
 
-    public int totalNPCs = 20; // Total NPCs in the game (adjust as needed)
-    private int talkedToNPCs = 0; // Count of NPCs the player has talked to
-    public string goodEndingScene = "Ending_Good";
-    public string badEndingScene = "Ending_Bad";
+    public int totalNPCs = 3;  // Total number of NPCs
+    private int talkedToNPCs = 0;  // Number of NPCs talked to
+    public string goodEndingScene = "GoodEnding";
+    public string badEndingScene = "Ending_GameOver";
 
     void Update()
     {
@@ -43,12 +43,13 @@ public class Time_System : MonoBehaviour
         }
     }
 
-
+    // This function is called when an NPC interaction occurs
     public void RegisterNPCInteraction()
     {
         if (talkedToNPCs < totalNPCs)
         {
             talkedToNPCs++;
+            Debug.Log($"Interacted with {talkedToNPCs}/{totalNPCs} NPCs");
         }
     }
 }

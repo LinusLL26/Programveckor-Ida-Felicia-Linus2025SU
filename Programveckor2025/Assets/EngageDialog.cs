@@ -13,6 +13,8 @@ public class EngageDialog : MonoBehaviour
 
     public InteractKey interactKey;
 
+    public Time_System timeSystem;
+
     BoxCollider2D InteractionTrigger;
 
     bool isCollider;
@@ -22,6 +24,8 @@ public class EngageDialog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        timeSystem = FindObjectOfType<Time_System>();
 
         InteractionTrigger = GetComponent<BoxCollider2D>();
 
@@ -35,6 +39,14 @@ public class EngageDialog : MonoBehaviour
 
         DialogBox.SetActive(false);
         DialogText.SetActive(false);
+
+
+        // Assign Time_System from the scene if not already set in the Inspector
+        if (timeSystem == null)
+        {
+            timeSystem = FindObjectOfType<Time_System>();
+        }
+
     }
 
     private void Update()
@@ -50,7 +62,13 @@ public class EngageDialog : MonoBehaviour
 
                 DialogBox.SetActive(true);
                 DialogText.SetActive(true);
+
+            // Notify Time_System of the interaction
+            timeSystem.RegisterNPCInteraction();
         }
+
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
