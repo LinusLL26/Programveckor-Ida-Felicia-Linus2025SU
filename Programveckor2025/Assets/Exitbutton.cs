@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class Gameovertomainlobby : MonoBehaviour
+public class Exitbutton : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -12,12 +11,8 @@ public class Gameovertomainlobby : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void QuitGame()
     {
-        
-    }
-    public void startgame()
-    {
-        SceneManager.LoadScene(0);
+        Application.Quit();
     }
 }
