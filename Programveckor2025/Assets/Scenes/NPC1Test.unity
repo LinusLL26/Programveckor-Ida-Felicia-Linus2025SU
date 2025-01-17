@@ -256,6 +256,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4302092848950019335, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971970668970164616, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
+      propertyPath: MoveUpKey
+      value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971970668970164616, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
+      propertyPath: MoveDownKey
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971970668970164616, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
+      propertyPath: MoveLeftKey
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971970668970164616, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
+      propertyPath: MoveRightKey
+      value: 275
+      objectReference: {fileID: 0}
     - target: {fileID: 8331169918221212264, guid: 3fb04bae80b435c449385a2591a71c6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
