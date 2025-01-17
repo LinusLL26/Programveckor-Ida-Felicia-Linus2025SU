@@ -247,7 +247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextTimer: {fileID: 1143856329}
-  RemainingTime: 3600
+  RemainingTime: 600
+  totalNPCs: 3
+  goodEndingScene: Ending_Good
+  badEndingScene: Ending_Bad
 --- !u!114 &542962769
 MonoBehaviour:
   m_ObjectHideFlags: 0

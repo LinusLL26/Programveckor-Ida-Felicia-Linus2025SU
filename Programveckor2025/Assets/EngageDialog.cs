@@ -63,8 +63,7 @@ public class EngageDialog : MonoBehaviour
                 DialogBox.SetActive(true);
                 DialogText.SetActive(true);
 
-            // Notify Time_System of the interaction
-            timeSystem.RegisterNPCInteraction();
+           
         }
 
 

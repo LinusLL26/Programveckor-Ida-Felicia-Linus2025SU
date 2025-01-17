@@ -9,6 +9,7 @@ public class Time_System : MonoBehaviour
 
     public int totalNPCs = 3;  // Total number of NPCs
     private int talkedToNPCs = 0;  // Number of NPCs talked to
+    private int completedQuests = 0;  // Number of completed quests
     public string goodEndingScene = "GoodEnding";
     public string badEndingScene = "Ending_GameOver";
 
@@ -33,7 +34,7 @@ public class Time_System : MonoBehaviour
 
     void NoTime()
     {
-        if (talkedToNPCs >= totalNPCs)
+        if (talkedToNPCs >= totalNPCs && completedQuests == totalNPCs)  // Check if all NPCs are talked to and all quests are completed
         {
             SceneManager.LoadScene("GoodEnding"); // Load the good ending
         }
@@ -44,12 +45,19 @@ public class Time_System : MonoBehaviour
     }
 
     // This function is called when an NPC interaction occurs
-    public void RegisterNPCInteraction()
+    public void RegisterNPCInteraction(bool hasCompletedQuest)
     {
         if (talkedToNPCs < totalNPCs)
         {
             talkedToNPCs++;
-            Debug.Log($"Interacted with {talkedToNPCs}/{totalNPCs} NPCs");
+
+            // If the quest is completed, increment the completed quests
+            if (hasCompletedQuest)
+            {
+                completedQuests++;
+            }
+
+            Debug.Log($"Interacted with {talkedToNPCs}/{totalNPCs} NPCs, Completed {completedQuests}/{totalNPCs} quests");
         }
     }
 }
