@@ -1,165 +1,85 @@
-using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using UnityEngine.UI;
+using TMPro;
 
-
-[RequireComponent(typeof(TMP_Text))]
-public class TypingEffect : MonoBehaviour
+public class typewriterUI : MonoBehaviour
 {
-    //all of this is copied from a youtube tutorial
+    Text _text;
+    TMP_Text _tmpProText;
+    string writer;
 
-    private TMP_Text TextBox;
-    private int currentlyVisibleCharacterIndex;
-    private bool readyForNewText = true;
+    [SerializeField] float delayBeforeStart = 0f;
+    [SerializeField] float timeBtwChars = 0.1f;
+    [SerializeField] string leadingChar = "";
+    [SerializeField] bool leadingCharBeforeDelay = false;
 
-    private Coroutine TypeWriterCoroutine;
-
-    private WaitForSeconds _basicDelay;
-    private WaitForSeconds _interpuctuationDelay;
-
-    [Header("TypeWriter settings")]
-    [SerializeField] private float charactersPerSecond = 20;
-    [SerializeField] private float interpuctuationDelay = 0.5f;
-
-
-    public bool IsCurrentlySkipping { get; private set; }
-    private WaitForSeconds _skippingDelay;
-
-    [Header("Skipping options")]
-    [SerializeField] private bool quickSkip;
-    [SerializeField][Min(1)] private int SkipSpeedup = 5;
-
-    private WaitForSeconds _textBoxFulleventDelay;
-    [SerializeField][Range(0.1f, 0.5f)] private float sendDoneDelay = 0.25f;
-
-    public static event Action CompleteTextRevealed;
-    public static event Action<char> CharactersRevealed;
-
-    private void Awake()
+    // Use this for initialization
+    void Start()
     {
-        TextBox = GetComponent<TMP_Text>();
+        _text = GetComponent<Text>()!;
+        _tmpProText = GetComponent<TMP_Text>()!;
 
-        _basicDelay = new WaitForSeconds(1 / charactersPerSecond);
-        _interpuctuationDelay = new WaitForSeconds(interpuctuationDelay);
-
-        _skippingDelay = new WaitForSeconds(1 / (charactersPerSecond * SkipSpeedup));
-        _textBoxFulleventDelay = new WaitForSeconds(sendDoneDelay);
-    }
-    private void OnEnable()
-    {
-        TMPro_EventManager.TEXT_CHANGED_EVENT.Add(PrepareForNewText);
-    }
-    private void OnDisable()
-    {
-        TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(PrepareForNewText);
-    }
-
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (_text != null)
         {
-            if (TextBox.maxVisibleCharacters != TextBox.textInfo.characterCount - 1)
-            {
-                Skip();
-            }
+            writer = _text.text;
+            _text.text = "";
+
+            StartCoroutine("TypeWriterText");
+        }
+
+        if (_tmpProText != null)
+        {
+            writer = _tmpProText.text;
+            _tmpProText.text = "";
+
+            StartCoroutine("TypeWriterTMP");
         }
     }
 
-    public void PrepareForNewText(Object obj)
+    IEnumerator TypeWriterText()
     {
-        if (obj != TextBox || !readyForNewText || TextBox.maxVisibleCharacters >= TextBox.textInfo.characterCount)
-            return;
+        _text.text = leadingCharBeforeDelay ? leadingChar : "";
 
-        IsCurrentlySkipping = false;
-        readyForNewText = false;
+        yield return new WaitForSeconds(delayBeforeStart);
 
-        if (TypeWriterCoroutine != null)
-            StopCoroutine(TypeWriterCoroutine);
-
-        TextBox.maxVisibleCharacters = 0;
-        currentlyVisibleCharacterIndex = 0;
-
-        TypeWriterCoroutine = StartCoroutine(TypeWriter());
-        /*
-         if (!readyForNewText)
-         {
-             return;
-         }
-
-         readyForNewText = false;
-
-         if (TypeWriterCoroutine != null)
-         {
-             StopCoroutine(TypeWriterCoroutine);
-         }
-         else { 
-             TextBox.maxVisibleCharacters = 0;
-             currentlyVisibleCharacterIndex = 0;
-
-             TypeWriterCoroutine = StartCoroutine(routine: TypeWriter());
-         }*/
-    }
-    void Skip()
-    {
-        if (IsCurrentlySkipping)
+        foreach (char c in writer)
         {
-            return;
+            if (_text.text.Length > 0)
+            {
+                _text.text = _text.text.Substring(0, _text.text.Length - leadingChar.Length);
+            }
+            _text.text += c;
+            _text.text += leadingChar;
+            yield return new WaitForSeconds(timeBtwChars);
         }
 
-        IsCurrentlySkipping = true;
-
-        if (!quickSkip)
+        if (leadingChar != "")
         {
-            StartCoroutine(routine: SkipSpeedupReset());
-            return;
-        }
-
-        StopCoroutine(TypeWriterCoroutine);
-        TextBox.maxVisibleCharacters = TextBox.textInfo.characterCount;
-        readyForNewText = true;
-        CompleteTextRevealed?.Invoke();
-    }
-    private IEnumerator TypeWriter()
-    {
-        TMP_TextInfo textInfo = TextBox.textInfo;
-
-        while (currentlyVisibleCharacterIndex < textInfo.characterCount + 1)
-        {
-            int lastCharacterIndex = textInfo.characterCount - 1;
-
-            if (currentlyVisibleCharacterIndex >= lastCharacterIndex)
-            {
-                TextBox.maxVisibleCharacters++;
-                yield return _textBoxFulleventDelay;
-                CompleteTextRevealed?.Invoke();
-                readyForNewText = true;
-                yield break;
-            }
-
-
-            char character = textInfo.characterInfo[currentlyVisibleCharacterIndex].character;
-
-            TextBox.maxVisibleCharacters++;
-
-            if (!IsCurrentlySkipping && character == '.' || character == '?' || character == '!' || character == ',' || character == ':' || character == ';' || character == '-')
-            {
-                yield return _interpuctuationDelay;
-            }
-            else
-            {
-                yield return IsCurrentlySkipping ? _skippingDelay : _basicDelay;
-            }
-
-            CharactersRevealed?.Invoke(character);
-            currentlyVisibleCharacterIndex++;
+            _text.text = _text.text.Substring(0, _text.text.Length - leadingChar.Length);
         }
     }
-    private IEnumerator SkipSpeedupReset()
+
+    IEnumerator TypeWriterTMP()
     {
-        yield return new WaitUntil(() => TextBox.maxVisibleCharacters == TextBox.textInfo.characterCount - 1);
-        IsCurrentlySkipping = false;
+        _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
+
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        foreach (char c in writer)
+        {
+            if (_tmpProText.text.Length > 0)
+            {
+                _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+            }
+            _tmpProText.text += c;
+            _tmpProText.text += leadingChar;
+            yield return new WaitForSeconds(timeBtwChars);
+        }
+
+        if (leadingChar != "")
+        {
+            _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+        }
     }
 }
