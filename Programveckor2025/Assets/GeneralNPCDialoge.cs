@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GeneralNPCDialoge : MonoBehaviour
 {
+    public SoundManager soundManager;
+
     BoxCollider2D InteractionTrigger;
 
     public GameObject DialogBox;
@@ -81,6 +83,7 @@ public class GeneralNPCDialoge : MonoBehaviour
             TextObject.SetActive(true);
 
             lineNumber += 1;
+            soundManager.PlaySelectSound();
             DialogLines(dialogCollection.dialogID1, dialogCollection.dialogID2, dialogCollection.dialogID3, dialogCollection.dialogID4, dialogCollection.dialogID5, dialogCollection.dialogID6, dialogCollection.dialogID7, dialogCollection.dialogID8, dialogCollection.dialogID9, dialogCollection.dialogID10, dialogCollection.dialogID11, dialogCollection.dialogID12, dialogCollection.dialogID13, dialogCollection.dialogID14, dialogCollection.dialogID15, dialogCollection.dialogID16, dialogCollection.dialogID17, dialogCollection.dialogID18, dialogCollection.dialogID19, dialogCollection.dialogID20, lineNumber);
            
         }
